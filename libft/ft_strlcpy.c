@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:22:16 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/03 17:23:10 by jcohen           ###   ########.fr       */
+/*   Created: 2024/05/19 16:28:07 by jcohen            #+#    #+#             */
+/*   Updated: 2024/05/22 12:21:29 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "./ft_printf/includes/ft_printf.h"
-# include "./libft/libft.h"
-# include <signal.h>
-# include <unistd.h>
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+{
+	size_t	counter;
+	size_t	len_src;
 
-void	ft_handler(int sig, siginfo_t *info, void *unused);
-void	ft_bit_by_bit(int pid, char c);
-void	send_bit(int pid, char *msg);
-void	ft_handler_serv(int sig, siginfo_t *info, void *unused);
-
-#endif
+	len_src = 0;
+	while (src[len_src] != '\0')
+		len_src++;
+	if (size == 0)
+		return (len_src);
+	counter = 0;
+	while (counter < size - 1 && src[counter] != '\0')
+	{
+		dest[counter] = src[counter];
+		counter++;
+	}
+	dest[counter] = '\0';
+	return (len_src);
+}

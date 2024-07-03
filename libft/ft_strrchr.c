@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:22:16 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/03 17:23:10 by jcohen           ###   ########.fr       */
+/*   Created: 2024/05/19 16:28:13 by jcohen            #+#    #+#             */
+/*   Updated: 2024/05/22 15:02:10 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "./ft_printf/includes/ft_printf.h"
-# include "./libft/libft.h"
-# include <signal.h>
-# include <unistd.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	int	i;
 
-void	ft_handler(int sig, siginfo_t *info, void *unused);
-void	ft_bit_by_bit(int pid, char c);
-void	send_bit(int pid, char *msg);
-void	ft_handler_serv(int sig, siginfo_t *info, void *unused);
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	if (c == '\0')
+		return ((char *)(s + i));
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
+	}
+	return (NULL);
+}

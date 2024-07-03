@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   numeric_operations.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:22:16 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/03 17:23:10 by jcohen           ###   ########.fr       */
+/*   Created: 2024/05/28 14:54:39 by jcohen            #+#    #+#             */
+/*   Updated: 2024/06/25 15:51:06 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../includes/ft_printf.h"
 
-# include "./ft_printf/includes/ft_printf.h"
-# include "./libft/libft.h"
-# include <signal.h>
-# include <unistd.h>
+int	ft_strlen_printf(const char *str)
+{
+	int	len_str;
 
-void	ft_handler(int sig, siginfo_t *info, void *unused);
-void	ft_bit_by_bit(int pid, char c);
-void	send_bit(int pid, char *msg);
-void	ft_handler_serv(int sig, siginfo_t *info, void *unused);
+	len_str = 0;
+	while (str[len_str] != '\0')
+		len_str++;
+	return (len_str);
+}
 
-#endif
+int	ft_putnbr_long(long n)
+{
+	int	size;
+
+	size = 0;
+	if (n >= 10)
+		size += ft_putnbr_long(n / 10);
+	ft_putchar(n % 10 + '0');
+	size++;
+	return (size);
+}

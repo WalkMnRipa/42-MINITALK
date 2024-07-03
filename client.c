@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:58:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/06/26 12:51:01 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/03 17:22:56 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,15 @@ Envoyer des signaux SIGUSR1 et SIGUSR2 au serveur
 SIGUSR1 = 1
 SIGUSR2 = 0
 */
-void	ft_send_char(int pid, char c)
+
+void	ft_handler(int signo, siginfo_t *siginfo, void *unused)
+{
+	(void)unused;
+	(void)siginfo;
+	(void)signo;
+}
+
+void	ft_bit_by_bit(int pid, char c)
 {
 	int	bit;
 
@@ -34,10 +42,28 @@ void	ft_send_char(int pid, char c)
 	}
 }
 
+void	send_bit(int pid, char *msg)
+{
+	struct sigaction	act;
+	siginfo_t			siginfo;
+	int					i;
+
+	act.sa_flags = SA_SIGINFO;
+	act.sa_sigaction = &ft_handler;
+	sigemptyset(&act.sa_mask);
+	sigaction(SIGUSR1, &act, 0);
+	siginfo.si_pid = pid;
+	i = 0;
+	while (msg[i] != '\0')
+	{
+		ft_bit_by_bit(pid, msg[i++]);
+	}
+	ft_printf("-----MESSAGE SENT-----\n");
+}
+
 int	main(int argc, char **argv)
 {
 	int	pid;
-	int	i;
 
 	if (argc != 3)
 	{
@@ -45,12 +71,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
-	i = 0;
-	while (argv[2][i])
+	if (pid < 1)
 	{
-		ft_send_char(pid, argv[2][i]);
-		i++;
+		ft_printf("INVALID PID.\n");
+		return (1);
 	}
-	ft_send_char(pid, 0);
+	send_bit(pid, argv[2]);
 	return (0);
 }

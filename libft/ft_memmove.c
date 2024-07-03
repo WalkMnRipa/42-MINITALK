@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:22:16 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/03 17:23:10 by jcohen           ###   ########.fr       */
+/*   Created: 2024/05/20 13:53:22 by jcohen            #+#    #+#             */
+/*   Updated: 2024/05/22 14:56:51 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "./ft_printf/includes/ft_printf.h"
-# include "./libft/libft.h"
-# include <signal.h>
-# include <unistd.h>
+void	ft_reverse_cpy(void *dest, const void *src, size_t n)
+{
+	while (n > 0)
+	{
+		((char *)dest)[n - 1] = ((char *)src)[n - 1];
+		n--;
+	}
+}
 
-void	ft_handler(int sig, siginfo_t *info, void *unused);
-void	ft_bit_by_bit(int pid, char c);
-void	send_bit(int pid, char *msg);
-void	ft_handler_serv(int sig, siginfo_t *info, void *unused);
-
-#endif
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	if (dest > src)
+	{
+		ft_reverse_cpy(dest, src, n);
+	}
+	else
+	{
+		ft_memcpy(dest, src, n);
+	}
+	return (dest);
+}

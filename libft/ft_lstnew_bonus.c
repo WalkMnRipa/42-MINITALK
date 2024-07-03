@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:22:16 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/03 17:23:10 by jcohen           ###   ########.fr       */
+/*   Created: 2024/05/23 16:31:39 by jcohen            #+#    #+#             */
+/*   Updated: 2024/05/24 17:16:42 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "./ft_printf/includes/ft_printf.h"
-# include "./libft/libft.h"
-# include <signal.h>
-# include <unistd.h>
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new_node;
 
-void	ft_handler(int sig, siginfo_t *info, void *unused);
-void	ft_bit_by_bit(int pid, char c);
-void	send_bit(int pid, char *msg);
-void	ft_handler_serv(int sig, siginfo_t *info, void *unused);
-
-#endif
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
+		return (NULL);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
+}

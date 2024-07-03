@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/23 16:58:24 by jcohen            #+#    #+#              #
-#    Updated: 2024/06/26 12:50:56 by jcohen           ###   ########.fr        #
+#    Updated: 2024/07/01 14:23:08 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ OBJ_DIR = obj
 SRCS = server.c client.c
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-LIBFT_DIR = ../libft
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-PRINTF_DIR = ../ft_printf
+PRINTF_DIR = ./ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf

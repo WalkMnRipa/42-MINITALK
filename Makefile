@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/23 16:58:24 by jcohen            #+#    #+#              #
-#    Updated: 2024/07/01 14:23:08 by jcohen           ###   ########.fr        #
+#    Updated: 2024/07/06 19:10:41 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ server: $(OBJ_DIR)/server.o $(LIBFT) $(PRINTF)
 
 client: $(OBJ_DIR)/client.o $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+	
+bonus: all
 
 clean:
 	$(RM) $(OBJS)

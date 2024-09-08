@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/23 16:58:24 by jcohen            #+#    #+#              #
-#    Updated: 2024/07/06 19:10:41 by jcohen           ###   ########.fr        #
+#    Updated: 2024/09/08 17:39:46 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,7 @@ OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-PRINTF_DIR = ./ft_printf
-PRINTF = $(PRINTF_DIR)/libftprintf.a
-
-LDFLAGS = -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf
+LDFLAGS = -L$(LIBFT_DIR) -lft
 
 RM = rm -rf
 
@@ -38,13 +35,10 @@ all: $(LIBFT) $(PRINTF) server client
 $(LIBFT):
 	$(MAKE) $(LIBFT_DIR)
 
-$(PRINTF):
-	$(MAKE) $(PRINTF_DIR)
-
-server: $(OBJ_DIR)/server.o $(LIBFT) $(PRINTF)
+server: $(OBJ_DIR)/server.o $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-client: $(OBJ_DIR)/client.o $(LIBFT) $(PRINTF)
+client: $(OBJ_DIR)/client.o $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 	
 bonus: all
@@ -52,12 +46,10 @@ bonus: all
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) $(LIBFT_DIR) clean
-	$(MAKE) $(PRINTF_DIR) clean
 
 fclean: clean
 	$(RM) server client
 	$(MAKE) $(LIBFT_DIR) fclean
-	$(MAKE) $(PRINTF_DIR) fclean
 	$(RM) $(OBJ_DIR)
 
 re: fclean all
